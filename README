@@ -1,0 +1,12 @@
+homebrewでffmpegをインストールする。
+以下ディレクトリに画像と動画を配置して、merge.pyを実行する。
+結合された動画がoutput_videosに出力される。
+
+/videos
+    <ネームルール>
+    ■作品紹介画像
+        [id]_intro.jpg
+    ■作品動画
+        [id]_project.mp4
+    ■総評画像
+        [id]_comment.jpg

@@ -1,0 +1,11 @@
+__pycache__
+.DS_Store
+*.mov
+*.jpeg
+*.mp4
+*.MOV
+*.MP4
+/sample
+*.txt
+merge-test.py
+*.rtf
