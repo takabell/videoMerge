@@ -5,6 +5,7 @@ import glob
 input_folder = "videos"
 output_folder = "output_videos"
 os.makedirs(output_folder, exist_ok=True)
+#作品数
 count = 3
 
 def changeImageVideo(intro_img, intro_video, fade_filter):
