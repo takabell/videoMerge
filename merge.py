@@ -19,7 +19,7 @@ def changeImageVideo(intro_img, intro_video, fade_filter):
         shell=True
     )
 
-def changeNoneAudio(intro_video, intro_with_audio):
+def makeNoneAudio(intro_video, intro_with_audio):
     """
         空の音声ファイル(mp4)を作成
         -shortest(映像と音の長さを合わせる)
@@ -78,12 +78,12 @@ for i in range(1, count+1):
     # 無音の音声を作成して結合
     intro_with_audio = f"{output_folder}/{num}_intro_with_audio.mp4"
     #anullsrc(無音の音声)、
-    changeNoneAudio(intro_video, intro_with_audio)
+    makeNoneAudio(intro_video, intro_with_audio)
 
     #総評画像を動画に変換
     changeImageVideo(comment_img, comment_video, fade_filter)
     comment_with_audio = f"{output_folder}/{num}_comment_with_audio.mp4"
-    changeNoneAudio(comment_video, comment_with_audio)
+    makeNoneAudio(comment_video, comment_with_audio)
 
     """
         作品動画
