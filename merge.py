@@ -8,6 +8,10 @@ os.makedirs(output_folder, exist_ok=True)
 #作品数
 count = 3
 
+# チャプター情報リスト
+youtube_chapters = []
+current_time = 0
+
 def changeImageVideo(intro_img, intro_video, fade_filter):
     """
         画像を動画に変換
@@ -101,7 +105,6 @@ for i in range(1, count+1):
 
     """
         紹介画像+作品動画+総評画像の結合
-        紹介画像と音声、作品動画と
     """
     # 音声付きconcat
     subprocess.run(
@@ -112,6 +115,17 @@ for i in range(1, count+1):
     )
 
     print(f" {num} 完了")
+
+    # 動画の長さを取得
+    result = subprocess.run(
+        f"ffprobe -i {output_video} -show_entries format=duration -v quiet -of csv='p=0'",
+        shell=True, capture_output=True, text=True
+    )
+    duration = float(result.stdout.strip())
+
+    # チャプター情報を追加
+    youtube_chapters.append(f"{int(current_time // 60)}:{int(current_time % 60):02d} 生徒{i}")
+    current_time += duration
 
 print("個別動画の生成完了")
 
@@ -124,3 +138,8 @@ with open("final_list.txt", "w") as f:
 
 subprocess.run(f"ffmpeg -f concat -safe 0 -i final_list.txt -c copy {final_output}", shell=True)
 print("全動画の結合完了")
+
+# チャプター情報をファイルに保存
+with open("youtube_chapters.txt", "w") as f:
+    f.write("\n".join(youtube_chapters))
+print("YouTube用チャプター情報を出力しました")
